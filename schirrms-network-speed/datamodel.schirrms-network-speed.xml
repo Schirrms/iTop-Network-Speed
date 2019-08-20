@@ -1,15 +1,226 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
-  <constants>
-  </constants>
-  <classes>
-  </classes>
-  <menus>
-  </menus>
-  <user_rights>
-    <groups>
-    </groups>
-    <profiles>
-    </profiles>
-  </user_rights>
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.3">
+	<constants>
+	</constants>
+	<classes>
+		<class id="NetworkSpeed" _delta="define">
+			<parent>cmdbAbstractObject</parent>
+			<properties>
+				<category>bizmodel,searchable</category>
+				<abstract>false</abstract>
+				<key_type>autoincrement</key_type>
+				<db_table>networkspeed</db_table>
+				<db_key_field>id</db_key_field>
+				<db_final_class_field/>
+				<naming>
+					<attributes>
+						<attribute id="humanspeed"/>
+					</attributes>
+				</naming>
+				<display_template/>
+				<reconciliation>
+					<attributes>
+						<attribute id="humanspeed"/>
+					</attributes>
+				</reconciliation>
+			</properties>
+			<fields>
+				<field id="humanspeed" xsi:type="AttributeString">
+					<sql>humanspeed</sql>
+					<default_value/>
+					<is_null_allowed>true</is_null_allowed>
+				</field>
+				<field id="bitspeed" xsi:type="AttributeDecimal">
+					<sql>bitspeed</sql>
+					<default_value/>
+					<is_null_allowed>false</is_null_allowed>
+					<duplicates>false</duplicates>
+					<digits>18</digits>
+					<decimals>0</decimals>
+				</field>
+				<field id="comment" xsi:type="AttributeText">
+					<sql>comment</sql>
+					<default_value/>
+					<is_null_allowed>true</is_null_allowed>
+				</field>
+				<field id="IPInterface_list" xsi:type="AttributeLinkedSet">
+					<linked_class>IPInterface</linked_class>
+					<ext_key_to_me>humanspeed_id</ext_key_to_me>
+					<edit_mode>add_only</edit_mode>
+					<count_min>0</count_min>
+					<count_max>0</count_max>
+					<duplicates/>
+				</field>
+			</fields>
+			<methods>
+				<method id="GetAttributeFlags">
+					<static>false</static>
+					<access>public</access>
+					<type>Overload-DBObject</type>
+					<code><![CDATA[ public function GetAttributeFlags($sAttCode, &$aReasons = array(), $sTargetState = '')
+					{
+						// Force the computed field to be read-only, preventing it to be written
+						if (($sAttCode == 'humanspeed'))
+							return(OPT_ATT_READONLY | parent::GetAttributeFlags($sAttCode, $aReasons, $sTargetState));
+						return parent::GetAttributeFlags($sAttCode, $aReasons, $sTargetState);
+					}]]></code>
+				</method>
+				<method id="GetInitialStateAttributeFlags">
+					<static>false</static>
+					<access>public</access>
+					<type>Overload-DBObject</type>
+					<code><![CDATA[public function GetInitialStateAttributeFlags($sAttCode, &$aReasons = array())
+					{
+						// Hide the calculated field in object creation form
+						if (($sAttCode == 'humanspeed'))
+							return(OPT_ATT_HIDDEN | parent::GetInitialStateAttributeFlags($sAttCode, $aReasons));
+						return parent::GetInitialStateAttributeFlags($sAttCode, $aReasons);
+					}]]></code>
+				</method>
+				<method id="OnInsert">
+					<static>false</static>
+					<access>public</access>
+					<type>Overload-DBObject</type>
+					<code><![CDATA[	public function OnInsert()
+					{
+						$this->SetHumanSpeed();
+					}]]></code>
+				</method>
+				<method id="OnUpdate">
+					<static>false</static>
+					<access>public</access>
+					<type>Overload-DBObject</type>
+					<code><![CDATA[	public function OnUpdate()
+					{
+						$this->SetHumanSpeed();
+					}]]></code>
+				</method>
+				<method id="SetHumanSpeed">
+					<static>false</static>
+					<access>public</access>
+					<type>Overload-DBObject</type>
+					<code><![CDATA[public function SetHumanSpeed()
+					{
+						// read the new value of the bitSpeed
+						$dBitSpeed = $this->Get('bitspeed');
+
+						// failsafe, the field cannot be empty
+						$sHumanSpeed = $dBitSpeed." b";
+
+						if(is_numeric($dBitSpeed))
+						{
+							$sUnit = ' KMGTP';
+							for ($iLevel=15; $iLevel >0 ;$iLevel=$iLevel-3)
+							{
+								if ($dBitSpeed >= 10**$iLevel)
+								{
+									$sHumanSpeed = sprintf('%.3g ', $dBitSpeed / (10**$iLevel)) . substr($sUnit, $iLevel/3, 1)."b/s";
+									break;
+								}
+							}
+						}
+
+						$this->Set('humanspeed', $sHumanSpeed);
+					}]]></code>
+				</method>
+			</methods>
+			<presentation>
+				<details>
+					<items>
+						<item id="bitspeed">
+							<rank>10</rank>
+						</item>
+						<item id="humanspeed">
+							<rank>20</rank>
+						</item>
+						<item id="comment">
+							<rank>30</rank>
+						</item>
+						<item id="IPInterface_list">
+							<rank>40</rank>
+						</item>
+					</items>
+				</details>
+				<list>
+					<items>
+						<item id="bitspeed">
+							<rank>10</rank>
+						</item>
+						<item id="humanspeed">
+							<rank>20</rank>
+						</item>
+						<item id="comment">
+							<rank>30</rank>
+						</item>
+					</items>
+				</list>
+				<search>
+					<items>
+						<item id="humanspeed">
+							<rank>10</rank>
+						</item>
+						<item id="comment">
+							<rank>20</rank>
+						</item>
+					</items>
+				</search>
+			</presentation>
+		</class>
+		<class id="IPInterface" _delta="must_exist">
+			<fields>
+				<field id="humanspeed_id" xsi:type="AttributeExternalKey" _delta="define">
+					<sql>humanspeed_id</sql>
+					<target_class>GenericCommSpeed</target_class>
+					<is_null_allowed>true</is_null_allowed>
+					<on_target_delete>DEL_MANUAL</on_target_delete>
+				</field>
+				<field id="humanspeed_speed" xsi:type="AttributeExternalField" _delta="define">
+					<extkey_attcode>humanspeed_id</extkey_attcode>
+					<target_attcode>humanspeed</target_attcode>
+				</field>
+			</fields>
+			<presentation>
+				<details>
+					<items>
+						<item id="humanspeed_id" _delta="define">
+							<rank>80</rank>
+						</item>
+					</items>
+				</details>
+				<list>
+					<items>
+						<item id="humanspeed_id" _delta="define">
+							<rank>80</rank>
+						</item>
+					</items>
+				</list>
+			</presentation>
+		</class>
+		<class id="PhysicalInterface" _delta=must_exist">
+			<presentation>
+				<details>
+					<items>
+						<item id="humanspeed_id" _delta="define">
+							<rank>85</rank>
+						</item>
+					</items>
+				</details>
+				<list>
+					<items>
+						<item id="humanspeed_id" _delta="define">
+							<rank>70</rank>
+						</item>
+					</items>
+				</list>
+			</presentation>
+		</class>
+	</classes>
+	<menus>
+	</menus>
+	<user_rights>
+		<groups>
+		</groups>
+		<profiles>
+		</profiles>
+	</user_rights>
 </itop_design>
