@@ -106,6 +106,18 @@ And in iTop, I get the new entries, with the 'Human Speed' set.
 
 This presentation package is there mostly because I really had troubles collecting all the informations needed to create a field
 
+I found most of the relevant informations in the official iTop documentation :
+
+https://www.itophub.io/wiki/page?id=2_6_0%3Acustomization%3Acascade-update
+
+As usual, grep was also my friend.
+
+I took time to find the correct name to call a method on object creation : silly me, I did think that iTop developers use the CRUD acronym, so I desperately tried to call a OnCreate function :) :) :) in iTop, you better call OnInsert !
+
+That being said, the iTop documentation is mostly great, but it's hard to find sample, and, as a non developer guy, I need samples to go. So here is a sample !
+
+
+
 * Read Only
 * Updated from another values 
 
