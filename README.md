@@ -76,7 +76,31 @@ From the 'Network Speed view, in the tab 'All interfaces at this Speed, you get 
 
 
 
+
+
 ![Speed detail View](images/NetworkSpeedInterfacesList.png)
+
+## Export/Import
+
+Because iTop is a very smart product, the call to the function computing the Human Speed is also done when importing data.
+
+So, via 'Data Administration' --> 'CSV Import' I copy/paste these data :
+
+```
+`"Complementary notes","Connection speed in bit/s"
+"One Gb/s 
+Test",1000000000
+"10 Gb / s",10000000000
+"20 Gb/s, mostly two 10 Gb/s aggegated",20000000000
+"100Mb / s",100000000
+"2 GB/s mostly an aggregation of two 1Gb/s",2000000000
+"Speed usualy used for FC interfaces",4000000000
+"Speed usualy used for FC interfaces",8000000000
+"Speed usualy used for FC interfaces",16000000000
+"Mostly use between our Juniper switches",40000000000`
+```
+
+And in iTop, I get the new entries, with the 'Human Speed' set.
 
 # For developers/Curious people
 
