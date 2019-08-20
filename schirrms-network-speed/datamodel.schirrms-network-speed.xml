@@ -196,7 +196,7 @@
 				</list>
 			</presentation>
 		</class>
-		<class id="PhysicalInterface" _delta=must_exist">
+		<class id="PhysicalInterface" _delta="must_exist">
 			<presentation>
 				<details>
 					<items>
