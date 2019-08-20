@@ -141,6 +141,6 @@ https://sourceforge.net/p/itop/discussion/922360/thread/3277f54512/
 
 To Combodo, of course :)
 
-To the whole iTop Forum, that i read a lot (even i i don't answer so much)
+To the whole iTop Forum, that I read a lot (even if I don't answer so much)
 
-Special thanks for Molkobain/Guillaume who help so much.
+Special thanks for Molkobain/Guillaume who helps so much.
