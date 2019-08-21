@@ -26,8 +26,8 @@
 				<uniqueness_rules>
 					<rule id="bitspeed">
 						<attributes>
-							<attribute id="bitspeed">
-						</attribute>
+							<attribute id="bitspeed"/>
+						</attributes>
 						<filter/>
 						<disabled>false</disabled>
 						<is_blocking>true</is_blocking>
