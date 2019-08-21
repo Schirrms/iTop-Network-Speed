@@ -16,6 +16,8 @@ Dict::Add('EN US', 'English', 'English', array(
 	'Class:NetworkSpeed/Attribute:comment' => 'Complementary notes',
 	'Class:NetworkSpeed/Attribute:humanspeed_id' => 'Human Readable Speed',
 	'Class:NetworkSpeed/Attribute:IPInterfaces_list' => 'All interfaces at this speed',
+	'Class:NetworkSpeed/UniquenessRule:bitspeed' => 'There is already a speed \'$this->finalclass$\' defined',
+	'Class:NetworkSpeed/UniquenessRule:bitspeed+' => 'There can be only one entry per speed',
 	'Class:IPInterface/Attribute:human_speed' => 'Human Readable Speed',
 	'Class:IPInterface/Attribute:humanspeed_id+' => 'Select here the interface speed. Clic \'+\' if the needed speed is not present.',
 	'Class:PhysicalInterface/Attribute:humanspeed_id' => 'Human Readable Speed',
