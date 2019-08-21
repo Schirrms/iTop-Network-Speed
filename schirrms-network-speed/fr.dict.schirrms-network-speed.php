@@ -16,7 +16,7 @@ Dict::Add('FR FR', 'French', 'Français', array(
 	'Class:NetworkSpeed/Attribute:comment' => 'Notes complémentaires',
 	'Class:NetworkSpeed/Attribute:humanspeed_id' => 'Vitesse en format humain',
 	'Class:NetworkSpeed/Attribute:IPInterfaces_list' => 'Toutes les interfaces à cette vitesse',
-	'Class:NetworkSpeed/UniquenessRule:bitspeed' => 'Une vitesse \'$this->finalclass$\' a déjà été définie',
+	'Class:NetworkSpeed/UniquenessRule:bitspeed' => 'Une vitesse \'$this->bitspeed$\' ($this->humanspeed$) a déjà été définie',
 	'Class:NetworkSpeed/UniquenessRule:bitspeed+' => 'Il ne peut y avoir qu\'une entrée par vitesse',
 	'Class:IPInterface/Attribute:humanspeed_id' => 'Vitesse humaine',
 	'Class:IPInterface/Attribute:humanspeed_id+' => 'Choisissez la vitesse de l\'interface. Cliquez \'+\' si votre vitesse n\'est pas présente.',
