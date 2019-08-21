@@ -35,7 +35,7 @@ While completely usable in my opinion, this add-on is more a case study. However
 What should be done :
 
 * Maybe some direct access to the NetworkSpeed class (From menu, or elsewhere)
-* At this time, it is possible to create more than one speed at the same speed. This is a 'bug in progress', I hope to find a solution (not my top level priority...)
+* At this time, it is possible to create more than one speed at the same speed. This is a 'bug in progress', I hope to find a solution (not my top level priority...)  --> Update 2019-08-21 : this no more true, thanks to vdumas and his great tuto, see below
 * For now, the legacy 'Speed' field is still present. It is really easy to hide, but I suspect that some useful information can be there...
 * I set a compatibility with iTop >= 2.3.0, because it seems that it should work but honestly, I only tested on iTop 2.6.1
 * .... What else ?
@@ -71,6 +71,10 @@ Just click '+' if the desired speed is not present in the drop down box.
 ![Interfaces Server Creation View](images/NewSpeedCreation.png)
 
 At this point, the 'Human Speed' is totally hidden. It will be computed at the Speed Creation.
+
+Thanks to the uniqueness rules, you cannot create more than one entry at a specific speed :
+
+![Speed detail View](images/NetworkSpeedDuplicate.png)
 
 If, from a physical interface, you click on one of the 'Human Speed', you get the details for this speed :
 
@@ -127,6 +131,10 @@ https://www.itophub.io/wiki/page?id=2_6_0%3Acustomization%3Acascade-update
 
 As usual, grep was also my friend.
 
+I had another point : Uniqueness (as I don't want in a SpeedList to have more than one entry for one speed.) Luckily, Combodo had published a very good tutorial for that :
+
+https://www.itophub.io/wiki/page?do=export_code&id=2_6_0%3Acustomization%3Auniqueness-rules
+
 I took time to find the correct name to call a method on object creation : silly me, I did think that iTop developers use the CRUD acronym, so I desperately tried to call a OnCreate function :) :) :) in iTop, you better call OnInsert !
 
 That being said, the iTop documentation is mostly great, but it's hard to find sample, and, as a non developer guy, I need samples to go. So here is a sample !
@@ -154,3 +162,5 @@ To Combodo, of course :)
 To the whole iTop Forum, that I read a lot (even if I don't answer so much)
 
 Special thanks for Molkobain/Guillaume who helps so much.
+
+Thanks for vdumas and his tutorial for uniqueness rules : https://www.itophub.io/wiki/page?do=export_code&id=2_6_0%3Acustomization%3Auniqueness-rules
